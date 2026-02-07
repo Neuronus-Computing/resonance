@@ -57,10 +57,11 @@ Typical outcomes of seed-based authentication:
 ---
 
 ### 3. Escrow System
-- Built-in trustless escrow service
-- Assisted dispute resolution
-- Decisions based on submitted evidence rather than user identity
-- Designed to support secure peer-to-peer transactions
+- Built-in trustless escrow service designed for secure peer-to-peer transactions
+- Cryptocurrency-based escrow payments, removing reliance on banks or traditional payment processors
+- Funds are locked in escrow wallets and cannot be accessed by either party until conditions are met
+- On-chain verifiable transactions, allowing both parties to independently verify locked and released funds
+- Evidence-based dispute resolution, with decisions made without relying on user identity
 
 ---
 
