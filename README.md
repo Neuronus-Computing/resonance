@@ -1,129 +1,86 @@
 # Resonance
 
 Resonance is a modern React application deployed at:
-https://resonance.neuronus.net/
+https://resonance.my/
 
 GitHub Repository:
 https://github.com/Neuronus-Computing/resonance
 
----
+## Overview
+Resonance is a privacy-first digital ecosystem designed to provide secure communication, anonymous financial interactions, and an extensible suite of privacy-oriented tools. The platform brings together encrypted messaging, crypto wallet functionality, escrow services, and third-party integrations under a single unified environment.
 
-## 🚀 Getting Started
-
-Follow these steps to run the project locally.
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/Neuronus-Computing/resonance.git
-cd resonance
-```
-
-### 2. Node Version Requirement
-
-⚠️ Important: This project requires **Node.js v16**
-
-Check your version:
-
-```bash
-node -v
-```
-
-If needed, switch using nvm:
-
-```bash
-nvm install 16
-nvm use 16
-```
-
-### 3. Install dependencies
-
-```bash
-npm install
-```
-
-### 4. Environment Variables
-
-Create a `.env` file in the root directory and add:
-
-```
-REACT_APP_API_BASE_URL=http://apiresonance.neuronus.net/api
-REACT_APP_API_BASE=http://apiresonance.neuronus.net
-REACT_APP_CHANNEL_URL=http://localhost:3001/channel/
-REACT_APP_API_QUANTOM_BASE_URL=https://qgraphy.xyz
-```
-
-Restart the server after editing environment variables.
-
-### 5. Start development server
-
-```bash
-npm start
-```
-
-The app will run at:
-
-```
-http://localhost:3000
-```
+This project represents a complete platform rather than a single application, focusing on anonymity, security, and user control.
 
 ---
 
-## 🛠 Requirements
+## Platform Entry Points
+- **Public Website:** https://resonance.my/
+- **Web Application Portal:** https://web.resonance.my/login
 
-- Node.js v16
-- npm
-- Git
-
----
-
-## 📁 Project Architecture
-
-```
-resonance/
-│
-├── public/                 # Static public files
-│
-├── src/
-│   ├── assets/             # Images, styles, fonts
-│   ├── components/         # Shared UI components
-│   ├── helpers/            # Helper utilities
-│   ├── locales/            # Translation files (i18n)
-│   ├── pages/              # Application views/pages
-│   ├── routes/             # Routing configuration
-│   ├── store/              # Redux store & reducers
-│   ├── util/               # Utility functions
-│   ├── App.js              # Root React component
-│   ├── index.js            # Entry point
-│   └── i18n.js             # Internationalization config
-│
-├── package.json
-└── README.md
-```
+The public website introduces the ecosystem, while the web application portal serves as the authenticated gateway to all core features and tools.
 
 ---
 
-## 🧠 Application Architecture
+## Authentication (Seed‑Based)
 
-- React functional components
-- Redux state management
-- Modular folder architecture
-- Environment-based configuration
-- Real-time channel support
+Resonance uses a **seed-based authentication model** designed for privacy-first access and account recovery without relying on traditional username/password-only identity.
+
+### What “seed-based” means
+A **seed** (often shown to users as a **16 words seed phrase**) is treated as the **root secret** for a user identity.
+
+Typical outcomes of seed-based authentication:
+- Users can **recover access** using the seed (even if they lose a device)
+- The platform can avoid storing sensitive password equivalents in a reversible form
+- Identity can be represented as **Seed** rather than personal information
+
+### How it works (high level flow)
+
+  **Seed creation (first-time users)**
+   - A new 16 words seed is generated.
+   - The user is shown the seed phrase and must keep it safe.
+
+## Core Features and Modules
+
+### 1. Secure Messaging System
+- End-to-end encrypted chat system
+- Multi-layer message routing for anonymity
+- Designed to prevent message traceability
+- Focus on privacy-preserving communication rather than identity-based messaging
 
 ---
 
-## 🏗 Production Build
+### 2. Cryptocurrency Wallet
+- Integrated crypto wallet within the platform
+- Designed for transfers, payments, and internal ecosystem usage
+- Intended to work seamlessly with escrow and other platform services
 
-To build the app for production:
+---
 
-```bash
-npm run build
-```
+### 3. Escrow System
+- Built-in trustless escrow service
+- Assisted dispute resolution
+- Decisions based on submitted evidence rather than user identity
+- Designed to support secure peer-to-peer transactions
 
-The optimized build will be inside:
+---
 
-```
-/build
-```
+## User Portal Capabilities
+Once authenticated, users can:
+- Access encrypted chats
+- Manage crypto wallets and balances
+- Use escrow services
+- Access integrated tools
+- Customize profiles and settings
+---
 
+## Security Philosophy
+Resonance is built around the following principles:
+- Privacy by default
+- Minimal user identity exposure
+- Encrypted data at rest and in transit
+- Anonymity-first design choices
+- Trustless and evidence-based systems
+
+---
+## Vision
+Resonance aims to provide a secure digital environment where privacy, anonymity, and user autonomy are foundational—not optional.
