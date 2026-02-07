@@ -77,22 +77,39 @@ http://localhost:3000
 
 ---
 
-## 📁 Project Structure
+## 📁 Project Architecture
 
 ```
 resonance/
 │
-├── public/          # Static files
+├── public/                 # Static public files
+│
 ├── src/
-│   ├── components/  # Reusable components
-│   ├── pages/       # App pages
-│   ├── assets/      # Images & styles
-│   ├── App.js
-│   └── index.js
+│   ├── assets/             # Images, styles, fonts
+│   ├── components/         # Shared UI components
+│   ├── helpers/            # Helper utilities
+│   ├── locales/            # Translation files (i18n)
+│   ├── pages/              # Application views/pages
+│   ├── routes/             # Routing configuration
+│   ├── store/              # Redux store & reducers
+│   ├── util/               # Utility functions
+│   ├── App.js              # Root React component
+│   ├── index.js            # Entry point
+│   └── i18n.js             # Internationalization config
 │
 ├── package.json
 └── README.md
 ```
+
+---
+
+## 🧠 Application Architecture
+
+- React functional components
+- Redux state management
+- Modular folder architecture
+- Environment-based configuration
+- Real-time channel support
 
 ---
 
