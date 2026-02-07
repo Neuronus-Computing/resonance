@@ -1,0 +1,90 @@
+
+// 
+// breadcrumb.scss
+//
+
+
+// Breadcrumb item arrow
+.breadcrumb-item {
+    > a {
+        color: var(--#{$prefix}body-color);
+    }
+    +.breadcrumb-item {
+        &::before {
+            font-family: "Material Design Icons";
+        }
+    }
+}
+
+// RTL
+
+[dir="rtl"] {
+    .breadcrumb-item {
+        +.breadcrumb-item {
+            padding-right: $breadcrumb-item-padding-x;
+
+            &::before {
+            font-family: "Material Design Icons";
+            padding-left: 0;
+                content: "\F0141";
+            }
+        }
+    }
+
+}
+.input-with-icon {
+    position: relative;
+    width: 100%;
+}
+
+.span-icons-cls span,
+.span-icons-cls i {
+  background-color: transparent;
+  border: 1px solid #D6E8FF;
+}
+
+.span-icons-cls i{
+  position: absolute;
+  right: 0.55rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--skyblueText);
+  font-size: 23px;
+  padding: 0px;
+  border: 0px;
+}
+
+.border-6-right{
+  border-top-right-radius: 6px !important;
+  border-bottom-right-radius: 6px !important;
+}
+
+.mr-10px{
+  margin-right: 10px;
+}
+
+  .input-with-icon input {
+    background: var(--fieldsMainBk);
+    border: 1px solid $pastelblue;
+    border-radius: 10px;
+    padding-right: 3rem; /* Adjust based on icon width */
+  }
+  
+  .input-icon {
+    position: absolute;
+    right: 0.75rem; /* Adjust based on icon size */
+    top: 50%;
+    transform: translateY(-50%);
+    color: $skyblue; /* Icon color */
+    font-size: 18px;
+  }
+  .Arena-cls{
+    background: var(--fieldsMainBk);
+    border: 1px solid $pastelblue;
+    border-radius: 10px;
+  }
+  .Dangerous{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }

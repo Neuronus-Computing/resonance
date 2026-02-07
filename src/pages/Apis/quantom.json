@@ -1,0 +1,323 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Quantomography API",
+    "version": "1.0.0",
+    "description": "API for securely encrypting secret files inside cover images using Quantomography technology. The encoded file is securely stored and accessible through a generated URL."
+  },
+  "tags": [
+    {
+      "name": "Quantomography",
+      "description": "Endpoints related to file encryption using Quantomography."
+    }
+  ],
+  "paths": {
+    "/upload-file": {
+      "post": {
+        "tags": ["Quantomography"],
+        "summary": "Upload secret file or cover file.",
+        "description": "This endpoint allows users to upload a secret file or a cover file. The `type` parameter determines the purpose of the uploaded file. When `type` is `cover`, only JPG or JPEG files are allowed.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "The file to upload. This can be a secret file or a cover file.",
+                    "example": "file_example.jpeg"
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "The type of file being uploaded. Must be either `secret` or `cover`. When `cover`, only JPG or JPEG files are allowed.",
+                    "enum": ["secret", "cover"],
+                    "example": "cover"
+                  }
+                },
+                "required": ["file", "type"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The file has been successfully uploaded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "image_url": {
+                      "type": "string",
+                      "description": "Relative URL to the uploaded file.",
+                      "example": "cover_files/1737614027_camrea.jpeg"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid file type or missing required fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message indicating the issue.",
+                      "example": "Invalid file type. Only JPG or JPEG files are allowed for cover."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Unsupported media type for the uploaded file.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message indicating the media type is not supported.",
+                      "example": "Unsupported file type. Please upload a valid file."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vangonography_encode": {
+      "post": {
+        "tags": ["Quantomography"],
+        "summary": "Encrypt your secret file inside a cover image using Quantomography.",
+        "description": "This endpoint allows users to securely encode a secret file into a cover image. Before using this endpoint, the user must upload the cover file and secret file using the `/upload-file` endpoint. The `original` parameter should contain the URL of the uploaded cover file, and the `secret_file` parameter should contain the URL of the uploaded secret file. An optional `password` parameter can be provided to protect the encoded file. If a password is set during encoding, the same password will be required to decode the file. Both files are securely stored, and the response includes the URL to access the encoded file.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "original": {
+                    "type": "string",
+                    "description": "Path to the original cover file. The file should be in JPG or JPEG format and will serve as the container for the secret file.",
+                    "example": "cover_files/1735453532_camrea.jpeg",
+                    "pattern": ".*\\.(jpg|jpeg)$"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "Optional password used to protect the encoded file. If provided, the same password will be required to decode.",
+                    "example": ""
+                  },
+                  "offset": {
+                    "type": "integer",
+                    "description": "Offset value to determine the position where the secret data will be encoded in the cover image.",
+                    "example": 100
+                  },
+                  "amount": {
+                    "type": "integer",
+                    "description": "Amount paid to encrypt secrect file within the cover image.",
+                    "example": 0
+                  },
+                  "is_paid": {
+                    "type": "integer",
+                    "description": "Indicates whether the request is part of a paid subscription or one-time purchase. Accepts 1 for paid and 0 for free.",
+                    "example": 1
+                  },
+                  "secret_file": {
+                    "type": "string",
+                    "description": "Path to the secret file to be encoded. This can be any file type, such as text, images, or documents.",
+                    "example": "secret_files/1735462585_file_example_favicon.ico"
+                  }
+                },
+                "required": [
+                  "original",
+                  "offset",
+                  "amount",
+                  "is_paid",
+                  "secret_file"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The secret file has been successfully encrypted into the cover image.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "description": "URL to download or access the encoded file. The file is securely stored and accessible only via this URL.",
+                      "example": "https://qgraphy.xyz/storage/encrypted_files/encrypted_image_677112796284d.png"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "One or more required files are not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message describing the file not found.",
+                      "examples": {
+                        "cover_file_not_found": "Cover file not found.",
+                        "secret_file_not_found": "Secret file not found."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Unsupported media type for the cover file.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message indicating the cover file format is invalid.",
+                      "example": "The cover file must be in JPG or JPEG format."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vangonography_decode": {
+      "post": {
+        "tags": ["Quantomography"],
+        "summary": "Decode an encrypted file using Quantomography.",
+        "description": "This endpoint allows users to decrypt a previously encoded file. The input requires the Base64-encoded encrypted image and an optional password. The endpoint processes the encoded image, validates the password (if provided), and returns the original secret data.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pictures": {
+                    "type": "object",
+                    "properties": {
+                      "original": {
+                        "type": "string",
+                        "description": "Base64 string representation of the encrypted image.",
+                        "example": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASw..."
+                      }
+                    },
+                    "required": ["original"]
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "Password used during the encoding process. This is required if the encoded file was password-protected.",
+                    "example": ""
+                  }
+                },
+                "required": ["pictures"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The file has been successfully decoded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Success message indicating the secret file has been saved.",
+                      "example": "Secret file saved successfully."
+                    },
+                    "file": {
+                      "type": "string",
+                      "description": "URL to the saved decoded secret file.",
+                      "example": "https://qgraphy.xyz/storage/secret/1735462585_file_example_favicon.ico"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "The name of the decoded secret file.",
+                      "example": "1735462585_file_example_favicon.ico"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The provided image is invalid or unprocessable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "General error message for invalid input.",
+                      "example": "It is not a valid picture. Please, use a valid encrypted picture with Vangography encoder with .png format."
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Detailed error description.",
+                      "example": "The provided file is either not a PNG or is not a valid encrypted image."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed due to incorrect password.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message for incorrect password.",
+                      "example": "Invalid password, Valid password is required to decode file."
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Detailed error description for incorrect password.",
+                      "example": "The provided password is incorrect."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

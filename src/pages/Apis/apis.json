@@ -1,0 +1,222 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Resonance",
+        "version": "1.0.0",
+        "description": "API documentation for Resonance."
+    },
+    "tags": [
+        {
+            "name": "User"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "JWT": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header",
+                "description": "JWT token used for authentication. Send the token directly without the 'Bearer' prefix."
+            }
+        }
+    },
+    "paths": {
+        "/register": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Generate and return sixteen seed words.",
+                "description": "Generates a set of sixteen unique seed words for user registration. These seed words act as a secure identifier for the user.",
+                "responses": {
+                    "200": {
+                        "description": "Seed generated successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "seed": {
+                                            "type": "string",
+                                            "example": "BOLT XYLOPHONE ALERT CRAB AXE BALL BITE ARCH BROWN CAP ARE BOOK COW ALL CUP BIG"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Register a user using seed words.",
+                "description": "Registers a new user in the system using a provided set of seed words. The seed words must be valid , unique and 16 words string.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "seed": {
+                                        "type": "string",
+                                        "description": "Seed for user registration."
+                                    }
+                                },
+                                "required": [
+                                    "seed"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User registered successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User registered successfully."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Invalid seed."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Log in a user using seed words.",
+                "description": "Authenticates a user by verifying the provided seed words. A valid JWT token is returned upon successful authentication.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "seed": {
+                                        "type": "string",
+                                        "description": "Seed for user authentication."
+                                    }
+                                },
+                                "required": [
+                                    "seed"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User logged in successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "description": "JWT token returned after successful login."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/authenticated": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Retrieve authenticated user details.",
+                "description": "Fetches information about the authenticated user. Requires a valid JWT token in the Authorization header.",
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Authenticated user retrieved successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {
+                                            "type": "string",
+                                            "description": "Details of the authenticated user."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

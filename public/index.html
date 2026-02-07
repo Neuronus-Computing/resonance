@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Resonance</title>
+    <meta name="description" content="Resonance is a secure messaging platform where users can buy and sell services with escrow payment protection." />
+    <meta name="author" content="iniTouch" />
+    <meta name="keywords" content="secure messaging, escrow payment, buy services, sell services, secure transactions" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Resonance - Secure Messaging and Services Marketplace" />
+    <meta property="og:description" content="Resonance is a secure messaging platform where users can buy and sell services with escrow payment protection." />
+    <meta property="og:type" content="website" />
+    <meta id="og-url" property="og:url" content="" />
+    <meta property="og:image" content="%PUBLIC_URL%/images/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Resonance - Secure Messaging and Services Marketplace" />
+    <meta name="twitter:description" content="Resonance is a secure messaging platform where users can buy and sell services with escrow payment protection." />
+    <meta name="twitter:image" content="%PUBLIC_URL%/images/twitter-image.png" />
+    <link rel="icon" href="%PUBLIC_URL%/blueicon.png" />
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var currentDomain = window.location.origin;
+        var ogUrlMetaTag = document.getElementById('og-url');
+        if (ogUrlMetaTag) {
+          ogUrlMetaTag.setAttribute('content', currentDomain);
+        }
+      });
+    </script>
+  </body>
+</html>

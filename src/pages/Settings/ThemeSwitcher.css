@@ -1,0 +1,60 @@
+/* #content {
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+  
+.theme-toggle-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  .theme-toggle {
+    position: relative;
+    display: flex;
+    background: #e0e0e0;
+    border-radius: 999px;
+    overflow: hidden;
+    width: fit-content;
+  }
+  
+  .theme-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px; /* Match the button width */
+    height: 100%;
+    border-radius: 999px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    z-index: 1; /* Must be over the button */
+    pointer-events: none; /* allow clicks to pass through */
+  }
+  
+  .theme-button {
+    width: 60px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    z-index: 2; /* Still above background, below indicator */
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    position: relative;
+  }
+  
+  .theme-button.active {
+    color: #fff;
+  }
+
+  @media (max-width:445px) {
+    .theme-toggle-wrapper {
+      padding: 2em 0rem;
+    }
+    .theme-button {
+      font-size: 12px;
+    }
+  }
+  

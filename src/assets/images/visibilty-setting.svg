@@ -1,0 +1,59 @@
+<svg
+  width="32"
+  height="32"
+  viewBox="0 0 48 48"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Background -->
+  <rect
+    width="48"
+    height="48"
+    rx="12"
+    fill="currentColor"
+  />
+
+  <!-- Eye outline -->
+  <path
+    d="M8 24
+       C12 18 18 15 24 15
+       C30 15 36 18 40 24
+       C36 30 30 33 24 33
+       C18 33 12 30 8 24Z"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="2"
+    stroke-linejoin="round"
+  />
+
+  <!-- User head -->
+  <circle
+    cx="24"
+    cy="22"
+    r="3"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="2"
+  />
+
+  <!-- User shoulders -->
+  <path
+    d="M19 28
+       C20.5 26.5 27.5 26.5 29 28"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="2"
+    stroke-linecap="round"
+  />
+
+  <!-- Rays -->
+  <g stroke="#ffffff" stroke-width="2" stroke-linecap="round">
+    <line x1="24" y1="6"  x2="24" y2="10"/>
+    <line x1="24" y1="38" x2="24" y2="42"/>
+    <line x1="6"  y1="24" x2="10" y2="24"/>
+    <line x1="38" y1="24" x2="42" y2="24"/>
+    <line x1="10" y1="10" x2="13" y2="13"/>
+    <line x1="35" y1="35" x2="38" y2="38"/>
+    <line x1="35" y1="13" x2="38" y2="10"/>
+    <line x1="10" y1="38" x2="13" y2="35"/>
+  </g>
+</svg>
